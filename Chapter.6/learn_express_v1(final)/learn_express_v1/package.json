@@ -1,0 +1,19 @@
+{
+  "name": "learn_express_v1",
+  "version": "0.0.1",
+  "description": "express 웹서버의 핵심 기능 실습(router, middleware, req & res)",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "JYP",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

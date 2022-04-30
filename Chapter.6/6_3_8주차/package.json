@@ -1,0 +1,21 @@
+{
+  "name": "6_2_middleware",
+  "version": "0.0.2",
+  "description": "자주 사용하는 middleware 실습(maorgan, static, body-parser(json, urlencoded), cookie-parser, express-session, multer)",
+  "main": "app_v3.js",
+  "scripts": {
+    "start": "nodemon app_v3.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keyword": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
