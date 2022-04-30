@@ -1,7 +1,8 @@
 // 페이지 로딩 시 사용자 데이터 가져오는 함수
 async function getUser() {
   try {
-    const res = await axios.get('/users');
+    // const res = await axios.get('/users');
+    const res = await axios.get('/visit/users');
     const users = res.data;
 
     const list = document.getElementById('list');
@@ -27,7 +28,8 @@ async function getUser() {
         }
         try {
           // 서버에 사용자 수정 요청 & getUser() 실행
-          await axios.put('/user/' + key, { name, memo });
+          // await axios.put('/user/' + key, { name, memo });
+          await axios.put('/visit/user/' + key, { name, memo });
           getUser();
         } catch (err) {
           console.error(err);
@@ -41,7 +43,8 @@ async function getUser() {
       remove.addEventListener('click', async () => {
         try {
           // 서버에 사용자 삭제 요청 & getUser() 실행
-          await axios.delete('/user/' + key);
+          // await axios.delete('/user/' + key);
+          await axios.delete('/visit/user/' + key);
           getUser();
         } catch (err) {
           console.error(err);
@@ -74,7 +77,8 @@ document.getElementById('form').addEventListener('submit', async (e) => {
   }
   try {
     // 서버에 사용자 등록 요청 & getUser() 실행
-    await axios.post('/user', { name, memo });
+    // await axios.post('/user', { name, memo });
+    await axios.post('/visit/user', { name, memo });
     getUser();
   } catch (err) {
     console.error(err);
