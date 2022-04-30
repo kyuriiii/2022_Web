@@ -2,9 +2,9 @@
   "name": "6_2_middleware",
   "version": "0.0.2",
   "description": "자주 사용하는 middleware 실습(maorgan, static, body-parser(json, urlencoded), cookie-parser, express-session, multer)",
-  "main": "app_v3.js",
+  "main": "app_v4.js",
   "scripts": {
-    "start": "nodemon app_v3.js",
+    "start": "nodemon app_v4.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keyword": [],
