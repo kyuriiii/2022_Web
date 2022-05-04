@@ -1,0 +1,26 @@
+<body>
+  <header>
+      <%- include('./header'); %>
+  </header>
+
+  <h2> <%= title %> </h2>
+  <div>
+    <form id="form">
+      <label>방문자 명</label>
+      <input type="text" id="name"><br>
+      <label>남기는 말</label>
+      <input type="text" id="memo">
+      <button type="submit">제출</button>
+    </form>
+  </div>
+  <p> 
+  <div id="list"></div>
+
+  <footer>
+      <%- include('./footer'); %>
+  </footer>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./frontUser.js"></script>
+</body>
+</html>

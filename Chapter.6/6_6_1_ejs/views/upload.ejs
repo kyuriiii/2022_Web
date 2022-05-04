@@ -1,0 +1,20 @@
+<body>
+  <header>
+      <%- include('./header'); %>
+  </header>
+  <div>
+    <form id="form" action='/upload' method='post' 
+          enctype='multipart/form-data'>
+      <label>전송할 파일</label>
+      <input type="file" name="image"><br>
+      <label>파일 이름</label>
+      <input type="text" name="title"><p>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <footer>
+      <%- include('./footer'); %>
+  </footer>
+</body>
+</html>
