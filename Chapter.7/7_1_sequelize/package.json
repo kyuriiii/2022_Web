@@ -1,0 +1,23 @@
+{
+  "name": "7_1_sequelize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyuriiii/2022_Web.git"
+  },
+  "author": "kyuri99@naver.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyuriiii/2022_Web/issues"
+  },
+  "homepage": "https://github.com/kyuriiii/2022_Web#readme",
+  "dependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
