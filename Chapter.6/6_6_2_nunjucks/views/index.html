@@ -1,0 +1,53 @@
+<h1>{{title}}</h1>
+
+<br><hr><br>
+
+<!-- 내부 변수 사용 -->
+{% set node = 'Node.js' %}
+{% set js = 'Javascript' %}
+<p>{{node}} 와 {{js}}</p>
+
+<br><hr><br>
+
+<!-- 반복문1 -->
+<ul>
+    {% set fruits = ['사과', '배', '오렌지', '바나나', '복숭아'] %}
+    {% for item in fruits %}
+    <li>{{item}}</li>
+    {% endfor %}
+</ul>
+
+<br><hr><br>
+
+<!-- 반복문2 -->
+<ul>
+    {% set fruits = ['사과', '배', '오렌지', '바나나', '복숭아'] %}
+    {% for item in fruits %}
+    <li>{{loop.index}}번째 {{item}}</li>
+    {% endfor %}
+</ul>
+
+<br><hr><br>
+
+<!-- 조건문1 -->
+{% if isLoggedIn %}
+<div> 로그인 되었습니다.</div>
+{% else %}
+<div> 로그인이 필요합니다.</div>
+{% endif %}
+
+<br><hr><br>
+
+<!-- 조건문2 -->
+{% if fruit === 'apple' %}
+<div> 사과입니다.</div>
+{% elif fruit === 'banana' %}
+<div> 바나나입니다.</div>
+{% else %}
+<div> 둘 다 아닙니다</div>
+{% endif %}
+
+<br><hr><br>
+
+<!-- include -->
+{% include "footer.html" %}
