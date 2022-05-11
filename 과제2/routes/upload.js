@@ -30,16 +30,6 @@ router.post('/', upload.single( 'image'), (req, res) => {
     res.redirect('/profile');
 });
 
-router.post('/', upload.array( 'images'), (req, res) => {
-    console.log('Uploaded Array!');
-    res.redirect('/profile');
-});
-
-router.post('/', upload.fields[{ name: 'image1'}, {name: 'image2' }], (req, res) => {
-    console.log('Uploaded Fields!');
-    res.redirect('/profile');
-});
-
 router.post('/', upload.none(), (req, res) => {
     console.log('Uploaded Nodne!');
     res.redirect('/profile');
