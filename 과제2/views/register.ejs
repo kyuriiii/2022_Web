@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
+
+    <link rel="stylesheet" href="/static/css/user.css">
+</head>
+<body>
+    <div class="scene flex">
+        <section class="card">
+        <figure class="card__figure">
+            <img class="card__image" src="/public/icon.png" alt="귤비"/>
+        </figure>
+        <h1 class="card__heading">
+            <span> Welcome</span>
+        </h1>
+        <form class="card__form">
+            <label for="ID" class="visually">ID :</label>
+            <input id="ID" class="card__input" type="text" name="ID" />
+            <label for="password" class="visually">Password :</label>
+            <input id="password" class="card__input" type="password" name="pw" />
+            <label for="name" class="visually">Name :</label>
+            <input id="name" class="card__input" type="text" name="name" />
+            <label for="nickname" class="visually">NickName :</label>
+            <input id="nickname" class="card__input" type="text" name="nickname" />
+            <label for="contact" class="visually">Contact :</label>
+            <input id="contact" class="card__input" type="tel" name="contact" />
+            <button class="card__button" type="button">
+            <span>Login</span>
+            </button>
+        </form>
+        </section>
+    </div>
+</body>
+</html>

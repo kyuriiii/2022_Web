@@ -11,7 +11,7 @@ router.get('/', (req,res) => {
 });
 
 router.get('/login', async (req,res) => {
-    users = JSON.parse( await fs.readFile(path.join(__dirname,'public/users.json')) );
+    users = JSON.parse( await fs.readFile(path.join(__dirname,'../public/users.json')) );
     res.render('login');
 });
 
@@ -46,11 +46,15 @@ router.post('/register', async (req,res) => {
     users[ID] = { pw, name, nickname, contact };
 
     await fs.writeFile(
-        path.join(__dirname, 'public/users.json'),
+        path.join(__dirname, '../public/users.json'),
         JSON.stringify(users)
     );
     
     await res.redirect('login');
+});
+
+router.get('/profileAll', (req,res) => {
+    res.render('profileAll', { users: users });
 });
 
 router
@@ -73,7 +77,7 @@ router
         users[ID] = { pw, name, nickname, contact };
 
         await fs.writeFile(
-            path.join(__dirname, './users.json'),
+            path.join(__dirname, '../public/users.json'),
             JSON.stringify(users)
         );
 
@@ -88,7 +92,7 @@ router
         delete users[ID];
 
         await fs.writeFile(
-            path.join(__dirname, './users.json'),
+            path.join(__dirname, '../public/users.json'),
             JSON.stringify(users)
         );
         res.end();
