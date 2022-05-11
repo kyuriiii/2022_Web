@@ -29,10 +29,10 @@ router.get('/register', (req,res) => {
 });
 
 router.post('/register', async (req,res) => {
-    const { ID, pw, name } = req.body;
+    const { ID, pw, name, nickname, contact } = req.body;
 
     if ( users[ID] != null ) res.redirect('login');
-    users[ID] = { pw, name };
+    users[ID] = { pw, name, nickname, contact };
 
     await fs.writeFile(
         path.join(__dirname, 'public/users.json'),
@@ -42,6 +42,10 @@ router.post('/register', async (req,res) => {
     await res.redirect('login');
 });
 
-router.get('/profile', (req,res) => {
+router.get('/profile/:user_ID', (req,res) => {
+    const ID = req.params.user_ID;
 
+    if ( users[ID] != null ) res.redirect('login');
+
+    res.render('register', { user: users[ID] });
 });
