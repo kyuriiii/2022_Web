@@ -25,7 +25,7 @@ body {
   }
   
   .scene {
-    background: #362100;
+    background: #FFFFB0;
     height: 100vh;
     position: relative;
   }
@@ -37,7 +37,7 @@ body {
     border: 1px solid rgba(254, 254, 254, 0.18);
     border-radius: 15px;
     box-shadow: 0 10px 35px 0 rgba(54, 33, 0, 0.65);
-    color: white;
+    color: black;
     max-width: 300px;
     overflow: hidden;
     padding: 20px 30px 50px 30px;
@@ -62,10 +62,10 @@ body {
   }
   .card__input {
     background: rgba(254, 254, 254, 0.075);
-    border: 1px solid rgba(254, 254, 254, 0.3);
+    border: 1px solid rgba(255, 178, 330, 0.3);
     border-radius: 3px;
     box-sizing: border-box;
-    color: #FEFEFE;
+    color: #000000;
     font-size: 1rem;
     letter-spacing: 0.15rem;
     padding: 10px;
@@ -73,11 +73,11 @@ body {
   }
   .card__input:focus, .card__input:active {
     background: rgba(254, 254, 254, 0.08);
-    border: 1px solid rgba(254, 254, 254, 0.75);
+    border: 1px solid rgba(255, 178, 330, 0.3);
     outline: none;
   }
   .card__button {
-    background: rgba(254, 254, 254, 0.65);
+    background: rgba(255, 178, 330, 0.3);
     border: none;
     border-radius: 3px;
     color: #362100;
@@ -85,6 +85,11 @@ body {
     padding: 8px 20px;
   }
   .card__button:focus, .card__button:active {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 178, 308, 0.3);
     outline: none;
+  }
+
+  .card__button:hover {
+    background: rgba(255, 178, 308, 0.3);
+    cursor: pointer;
   }

@@ -15,15 +15,17 @@
         <h1 class="card__heading">
             <span> Hello! Log - In </span>
         </h1>
-        <form class="card__form">
+        <form class="card__form" action="login" method="post">
             <label for="ID" class="visually">ID :</label>
             <input id="ID" class="card__input" type="text" name="ID" />
             <label for="password" class="visually">Password :</label>
             <input id="password" class="card__input" type="password" name="pw" />
-            <button class="card__button" type="button">
+            <button class="card__button" type="submit">
             <span>Login</span>
             </button>
         </form>
+
+        <a href="register">Register</a>
         </section>
     </div>
 </body>

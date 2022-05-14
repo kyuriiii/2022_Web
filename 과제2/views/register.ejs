@@ -15,7 +15,7 @@
         <h1 class="card__heading">
             <span> Welcome</span>
         </h1>
-        <form class="card__form">
+        <form class="card__form" action="register" method="post">
             <label for="ID" class="visually">ID :</label>
             <input id="ID" class="card__input" type="text" name="ID" />
             <label for="password" class="visually">Password :</label>
@@ -26,10 +26,12 @@
             <input id="nickname" class="card__input" type="text" name="nickname" />
             <label for="contact" class="visually">Contact :</label>
             <input id="contact" class="card__input" type="tel" name="contact" />
-            <button class="card__button" type="button">
-            <span>Login</span>
+            <button class="card__button" type="submit">
+            <span>Register</span>
             </button>
         </form>
+
+        <a href="login">Login</a>
         </section>
     </div>
 </body>

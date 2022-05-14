@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
+
+    <link rel="stylesheet" href="/static/css/user.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div class="scene flex">
+        <section class="card">
+        <figure class="card__figure">
+            <img class="card__image" src="/public/icon.png" alt="귤비"/>
+        </figure>
+        <h1 class="card__heading">
+            <span> Welcome</span>
+        </h1>
+        <form class="card__form" action="" id="form_profile">
+            <label for="ID" class="visually">ID :</label>
+            <input id="ID" class="card__input" type="text" name="ID" value="<%=ID%>" required/>
+            <label for="password" class="visually">Password :</label>
+            <input id="password" class="card__input" type="password" name="pw" required/>
+            <label for="name" class="visually">Name :</label>
+            <input id="name" class="card__input" type="text" name="name" value="<%=user['name']%>" required/>
+            <label for="nickname" class="visually">NickName :</label>
+            <input id="nickname" class="card__input" type="text" name="nickname" value="<%=user['nickname']%>" required/>
+            <label for="contact" class="visually">Contact :</label>
+            <input id="contact" class="card__input" type="tel" name="contact" value="<%=user['contact']%>" required/>
+            <button class="card__button" type="button" onclick="putProfile();">
+            <span>Edit</span>
+            </button>
+            <button class="card__button" type="button" onclick="deleteProfile();">
+                <span>Delete</span>
+            </button>
+        </form>
+
+        <a href="/logout">Logout</a>
+        </section>
+    </div>
+
+    <script>
+        function putProfile() {
+            var form = document.getElementById( "form_profile" );
+
+            form.reportValidity();
+
+            $.ajax({
+                method : 'PUT',
+                url : '/profile/<%=ID%>',
+                data : { pw: form.pw.value, name: form.name.value, nickname: form.nickname.value, contact: form.contact.value  }
+                }).done((result)=>{
+                    alert(result);
+                });
+        }
+        
+        function deleteProfile() {
+            if ( confirm("정보를 삭제하시겠습니까?\n삭제가 완료되면 로그인 페이지로 이동합니다.")){
+                $.ajax({
+                    method : 'DELETE',
+                    url : '/profile/<%=ID%>'
+                }).done((result)=>{
+                    alert(result);
+                    document.location.href="/";
+                });
+            }
+        }
+    </script>
+</body>
+</html>
