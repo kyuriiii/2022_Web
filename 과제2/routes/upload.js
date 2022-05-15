@@ -3,16 +3,20 @@
 
 const express = require('express');
 const multer = require('multer');
+const path = require('path');
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function(req,file,cb) {
-        cb(null, 'profile/');
+        cb(null, 'img/');
     },
     filename: function(req, file, cb) {
         const ext = path.extname(file.originalname);
-        cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+        console.log( "session - : ", req.session.user_ID);
+        if ( !ext.includes( "png" ) ) 
+            return cb(new Error( 'png 확장자만 업로드 가능합니다.') );
+        cb(null, req.session.user_ID + ext);
     }
 });
 
@@ -27,12 +31,12 @@ router.get('/', (req,res) => {
 
 router.post('/', upload.single( 'image'), (req, res) => {
     console.log('Uploaded Single!');
-    res.redirect('/profile');
+    res.redirect('/');
 });
 
 router.post('/', upload.none(), (req, res) => {
     console.log('Uploaded Nodne!');
-    res.redirect('/profile');
+    res.redirect('/');
 });
 
 module.exports = router;

@@ -3,25 +3,37 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs').promises;
 
+// users.json 파일을 읽어와 users에 대한 정보를 저장할 배열
 var users = [];
 
 router.get('/', async (req,res) => {
-    console.log( "root - ", req.session.user_ID );
-    console.log( "root - ", req.signedCookies.is_login );
+    // 로그인 된 상태면 profile 페이지를, 로그인 되지 않았다면 로그인 가능 페이지를 보여준다.
     if ( req.signedCookies.is_login != null ) res.redirect('/profile');
-    else {
-        users = JSON.parse( await fs.readFile(path.join(__dirname,'../public/users.json')) );
-        res.render('login');
-    }
+    else res.redirect('/login');
 });
 
-router.get('/login', async (req,res) => {
+router.get('/login', (req,res) => {
+    console.log( "login : ", users );
+    res.render('login');
 });
 
-router.post('/login', (req,res) => {
+
+router.post('/login', async(req,res) => {
+    users = await JSON.parse( await fs.readFile(path.join(__dirname,'../public/users.json')) );
+    
     const { ID, pw } = req.body;
-    if( users[ID] == null || users[ID].pw != pw ) res.status(400).send({msg: process.env.LOGIN_FAIL});
-    else {
+    console.log( "login1 : ", users[ID] );
+    console.log( "login2 : ", pw );
+    if( users[ID] == null || users[ID].pw != pw ) {
+        // 로그인 실패 메시지를 띄우고 새로고침
+        res.send( `
+            <script>
+                alert( "${process.env.LOGIN_FAIL}" );
+                document.location.href="/";
+            </script>
+        `);
+    } else {
+        // cookie에 로그인 된 상태 저장, sessino에 user의 ID 저장
         res.cookie('is_login', true, {
             // expores: new Date(Date.now() + 3000),
             maxAge: 600000,
@@ -43,24 +55,22 @@ router.get('/register', (req,res) => {
 });
 
 router.post('/register', async (req,res) => {
+    users = JSON.parse( await fs.readFile(path.join(__dirname,'../public/users.json')) );
     const { ID, pw, name, nickname, contact } = req.body;
 
+    console.log(req.body);
     if ( users[ID] != null ) {
         res.redirect('/');
         return false;
     }
     users[ID] = { pw, name, nickname, contact };
-
     await fs.writeFile(
         path.join(__dirname, '../public/users.json'),
         JSON.stringify(users)
     );
+    console.log( "register : ", users );
     
-    await res.redirect('/');
-});
-
-router.get('/profileAll', (req,res) => {
-    res.render('profileAll', { users: users });
+    await res.redirect('/login');
 });
 
 router.get('/profile', (req,res) => {
@@ -100,6 +110,8 @@ router
         res.send("성공");
     })
     .delete( async (req,res) => {
+        // 저장된 cookie와 session을 모두 삭제
+        // 사용자 정보 삭제
         if ( !req.signedCookies.is_login ) {
             res.redirect('/');
             return false;

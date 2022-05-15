@@ -1,17 +1,21 @@
 <html>
 <head>
-    <title>회원가입</title>
+    <title>프로필</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
 
-    <link rel="stylesheet" href="/static/css/user.css">
+    <link rel="stylesheet" href="/public/css/user.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <div class="scene flex">
         <section class="card">
         <figure class="card__figure">
-            <img class="card__image" src="/public/icon.png" alt="귤비"/>
+            <img class="card__image" src="/img/<%=ID%>.png" alt="<%=user['name']%>"/>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="image">
+                <button type="submit">프로필 업로드</button>
+            </form>
         </figure>
         <h1 class="card__heading">
             <span> Welcome</span>

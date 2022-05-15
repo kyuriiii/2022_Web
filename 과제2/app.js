@@ -16,8 +16,7 @@ app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
 app.use("/public", express.static(path.join(__dirname,'public')));
-app.use("/static", express.static(path.join(__dirname,'static')));
-app.use("/profile", express.static(path.join(__dirname,'profile')));
+app.use("/img", express.static(path.join(__dirname,'img')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
