@@ -10,17 +10,16 @@ module.exports = (Sequelize, DataTypes) => {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            name: {
+            sns_id: {
+                type: DataTypes.TEXT('medium'),
+                allowNull: false,
+            },
+            provider: {
                 type: DataTypes.STRING(10),
                 allowNull: false,
             },
             email: {
                 type: DataTypes.STRING(50),
-                allowNull: false,
-            },
-            password: {
-                type: DataTypes.STRING(255),
-                defaultValue: "",
                 allowNull: false,
             },
             nickname: {

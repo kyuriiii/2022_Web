@@ -1,13 +1,13 @@
-USE webFinal;
-ALTER DATABASE webFinal default charset=utf8 collate utf8_general_ci; 
+USE webfinal;
+ALTER DATABASE webfinal default charset=utf8 collate utf8_general_ci; 
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) NOT NULL,
+  `sns_id` mediumtext NOT NULL,
   `email` varchar(50) NOT NULL,
   `nickname` varchar(10) NOT NULL,
-  `password` varchar(255) NOT NULL DEFAULT '',
+  `provider` varchar(255) NOT NULL,
   `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB COMMENT '사용자';
@@ -27,7 +27,7 @@ CREATE TABLE `post` (
   `user_id` int unsigned NOT NULL,
   `lecture_id` int unsigned NOT NULL,
   `title` varchar(10) NOT NULL,
-  `content` varchar(50) NOT NULL,
+  `content` mediumtext NOT NULL,
   `point` mediumint unsigned NOT NULL,
   `registered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

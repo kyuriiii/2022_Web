@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const config = require("../config/secure/config.json")[process.env.DB_MODE];
+const config = require("../config/config.json")[process.env.DB_MODE];
 const db = {};
 
 const sequelize = new Sequelize(    
