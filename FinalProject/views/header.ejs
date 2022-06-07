@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script type="module">
+    import API from "/static/js/apiTools.js";
+    window.API = new API();
+</script>
+<script>
+    function getInfo() {
+        window.API.getInfo('/user', ( user ) => {
+            if ( user.nickname == null ) $( ".isNotLoggedIn" ).removeClass( "d-none" );
+            else $( ".isLoggedIn" ).removeClass( "d-none" );
+        });
+    }
+
+    function setUser( user ) {
+
+    }
+    function setGuest() {
+
+    }
+    
+    $(() => { getInfo(); });
+</script>
+</head>
+
+<body>
+    <style>
+        * { box-sizing: border-box; font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+        body { height: 100vh; }
+        a { text-decoration: none; outline: none; color: #000000; } 
+        a:hover, a:active { text-decoration: none; font-weight: bold; cursor: pointer; } 
+    </style>
+    <nav class="navbar navbar-expand-lg" style="background: #FFFFB0">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img width=50 height=50 src="/public/orange.png" alt="귤비"/>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <div class="d-none isLoggedIn">
+                    <a href="/user/mypage">내 정보</a>
+                    <a class="mx-3" href="/auth/logout">로그아웃</a>
+                </div>
+                <div class="d-none isNotLoggedIn">
+                    <a class="mx-3" href="/auth">로그인</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </nav>

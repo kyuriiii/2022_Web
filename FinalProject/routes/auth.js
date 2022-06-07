@@ -2,20 +2,13 @@ const express = require('express');
 
 const passport = require('../passport/index.js');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const User = require('../models/user');
+const controller = require('../controller/Auth');
 
 const router = express.Router();
 
-router.get('/', (req,res) => {
-    res.render("login");
-});;
+router.get('/', controller.login);
 
-router.get('/logout', isLoggedIn, (req, res) => {
-  req.logout(() => {
-    req.session.destroy();
-    res.redirect('/');
-  });
-});
+router.get('/logout', isLoggedIn, controller.logout);
 
 router.get('/kakao', passport.authenticate('kakao'));
 router.get(

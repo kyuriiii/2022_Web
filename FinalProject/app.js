@@ -35,10 +35,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// var postRouter=require("./routes/postRouter");
-// app.use("/", postRouter);
-var authRouter=require("./routes/authRouter");
-app.use("/auth", authRouter);
+var post = require("./routes/post");
+app.use("/", post);
+var auth = require("./routes/auth");
+app.use("/auth", auth);
+var user = require("./routes/user");
+app.use("/user", user);
 // var lectureRouter=require("./routes/lectureRouter");
 // app.use("/lecture", lectureRouter);
 // var payRouter=require("./routes/payRouter");

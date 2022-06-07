@@ -8,7 +8,6 @@ module.exports = new KakaoStrategy(
   },
   async (accessToken, refreshToken, profile, done) => {
     console.info('___new KakaoStrategy()');
-    console.log('___kakao profile', profile);
     try {
       const exUser = await User.findOne({
         where: { sns_id: profile.id, provider: 'kakao' },

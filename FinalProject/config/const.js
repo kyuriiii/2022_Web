@@ -1,0 +1,10 @@
+module.exports = {
+    ERRORCODE_BAD_REQUEST: 400,
+    ERRORCODE_UNAUTHORIZED: 401,
+    ERRORCODE_FORBIDDEN: 403,
+    ERRORCODE_NOT_FOUND: 404,
+    ERRORMSG_NOT_FOUND: '페이지를 찾을 수 없습니다.',
+    ERRORMSG_BAD_REQUEST: '잘못된 요청입니다.',
+    ERRORMSG_NO_PERMISSTION: '권한이 없습니다.',
+    ERRORMSG_UNKNOWN: '알 수 없는 오류입니다.'
+};
