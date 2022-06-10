@@ -9,5 +9,6 @@ router.use((req, res, next) => {
 });
 
 router.get("/", controller.getLectures);
+router.get("/all", isLoggedIn, controller.getLectureAll);
 
 module.exports = router;

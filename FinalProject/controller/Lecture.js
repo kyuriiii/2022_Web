@@ -7,7 +7,11 @@ exports.getLectures = async (req, res, next) => {
   await Lecture.findAll({ 
     offset: offset,
     limit: 10,
-    order: [['id','ASC']]
+    order: [['lecture_id','ASC']]
   })
   .then((lectures) => {console.log( lectures ); res.render('lecture', {lectures: lectures, page: parseInt( allLectures.length/10 ) + 1});});
+}
+
+exports.getLectureAll = (req, res, next) => {
+  Lecture.findAll({order: [['lecture_id','ASC']]}).then((lectures) => res.send(lectures) );
 }

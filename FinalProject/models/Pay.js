@@ -2,7 +2,7 @@ module.exports = (Sequelize, DataTypes) => {
     return Sequelize.define(
         process.env.DB_TABLE_PAY,
         {
-            id: {
+            pay_id: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 allowNull: false,

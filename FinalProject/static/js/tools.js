@@ -7,20 +7,20 @@ export function error( title, text ){
         });
 }
 
-export function confirm( title, text, success=()=>{}, fail=()=>{} ){
-    Swal.fire({
-        icon: 'warning',
-        title: title,
-        text: text,
-        showCancelButton: true,
-        confirmButonClass: "btn-danger",
-        confirmButtonText: "예",
-        cancelButtonText: "아니오",
-        closeOnConfirm: false,
-        closeOnCancel:  true
-    }, function ( isConfirm ){
-        if ( isConfirm ) success();
-        else fail();
+export function confirm( title, text ){
+    return new Promise( (resolve, reject) => {
+        Swal.fire({
+            icon: 'warning',
+            title: title,
+            text: text,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: "예",
+            cancelButtonText: "아니오",
+            cancelButtonColor: '#d33',
+        }).then((result) => {
+            if ( result.isConfirmed ){ resolve( true ); }
+        })
     });
 }
 

@@ -21,51 +21,52 @@ db.Lecture = require("./Lecture")(sequelize, Sequelize);
 
 db.User.hasMany(db.Post, {
     foreignKey: "user_id",
-    sourceKey: "id",
+    sourceKey: "user_id",
     onDelete: "set null",
 });
 db.Post.belongsTo(db.User, {
-    foreignKey: "id",
-    sourceKey: "user_id",
-    onDelete: "set null",
-});
-db.User.hasMany(db.Point, {
     foreignKey: "user_id",
-    sourceKey: "id",
-    onDelete: "set null",
-});
-db.Point.belongsTo(db.User, {
-    foreignKey: "id",
-    sourceKey: "user_id",
-    onDelete: "set null",
-});
-db.User.hasMany(db.Pay, {
-    foreignKey: "user_id",
-    sourceKey: "id",
-    onDelete: "set null",
-});
-db.Pay.belongsTo(db.User, {
-    foreignKey: "id",
     sourceKey: "user_id",
     onDelete: "set null",
 });
 db.Lecture.hasMany(db.Post, {
     foreignKey: "lecture_id",
-    sourceKey: "id",
+    sourceKey: "lecture_id",
     onDelete: "set null",
 });
 db.Post.belongsTo(db.Lecture, {
-    foreignKey: "id",
+    foreignKey: "lecture_id",
     sourceKey: "lecture_id",
+    onDelete: "set null",
+});
+
+db.User.hasMany(db.Point, {
+    foreignKey: "user_id",
+    sourceKey: "user_id",
+    onDelete: "set null",
+});
+db.Point.belongsTo(db.User, {
+    foreignKey: "user_id",
+    sourceKey: "user_id",
+    onDelete: "set null",
+});
+db.User.hasMany(db.Pay, {
+    foreignKey: "user_id",
+    sourceKey: "user_id",
+    onDelete: "set null",
+});
+db.Pay.belongsTo(db.User, {
+    foreignKey: "user_id",
+    sourceKey: "user_id",
     onDelete: "set null",
 });
 db.Post.hasOne(db.Pay, {
     foreignKey: "post_id",
-    sourceKey: "id",
+    sourceKey: "post_id",
     onDelete: "cascade",
 });
 db.Pay.belongsTo(db.Post, {
-    foreignKey: "id",
+    foreignKey: "post_id",
     sourceKey: "post_id",
     onDelete: "cascade",
 });

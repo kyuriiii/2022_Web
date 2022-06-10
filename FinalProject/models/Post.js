@@ -2,7 +2,7 @@ module.exports = (Sequelize, DataTypes) => {
     return Sequelize.define(
         process.env.DB_TABLE_POST,
         {
-            id: {
+            post_id: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 allowNull: false,
@@ -11,7 +11,7 @@ module.exports = (Sequelize, DataTypes) => {
                 autoIncrement: true,
             },
             title: {
-                type: DataTypes.STRING(10),
+                type: DataTypes.TEXT('medium'),
                 allowNull: false,
             },
             content: {

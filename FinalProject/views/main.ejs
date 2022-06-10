@@ -1,4 +1,41 @@
 <%-include('header') %>
-    
-</body>
-</html>
+<style>
+    .card:hover { cursor: pointer; transform: scale(1.05);}
+</style>
+<script type="module">
+    import { confirm, success } from '../static/js/tools.js';
+    window.confirm = confirm;
+    window.success = success;
+</script>
+<script>
+    async function confirmBuy(post_id, point) {
+        let isDo = await window.confirm("결제 진행", `${point}를 사용해 족보를 열람하시겠습니까?`);
+        if ( isDo ) buyPost(post_id);
+    }
+    function buyPost(post_id) {
+        window.API.getInfo(`/buy?post_id=${post_id}`, (result) => {
+            window.success("구매 성공", "마이페이지에 가서 확인해주시기 바랍니다.");
+        });
+    }
+</script>
+<div class="row">
+    <% posts.forEach( (post) => { %>
+        <div class="col-lg-3 col-md-4 col-sm-6 px-1 py-1">
+            <div class="card" onclick="confirmBuy('<%=post.post_id%>','<%=post.point%>');">
+                <img src="/public/post/<%=post.post_id%>.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><% 
+                        if ( post.title.length > 15 ) __append( post.title.substr(0,15) + "....");
+                        else __append( post.title ); %></h5>
+                    <p class="card-text">
+                        강의명 : <%=post.lecture.name%> <br>
+                        작성자 : <%=post.user.nickname%> <br> 
+                        포인트 : <%=post.point%>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%-include('footer') %>
