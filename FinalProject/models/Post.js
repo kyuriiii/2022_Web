@@ -18,6 +18,10 @@ module.exports = (Sequelize, DataTypes) => {
                 type: DataTypes.TEXT('medium'),
                 allowNull: false,
             },
+            point: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                allowNull: false,
+            },
             registered: {
                 type: "TIMESTAMP",
                 defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),

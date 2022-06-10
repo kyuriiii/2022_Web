@@ -10,16 +10,16 @@ module.exports = (Sequelize, DataTypes) => {
                 primaryKey: true,
                 autoIncrement: true,
             },
+            name: {
+                type: DataTypes.STRING(30),
+                allowNull: false,
+            },
             professor: {
                 type: DataTypes.STRING(10),
                 allowNull: false,
             },
-            name: {
-                type: DataTypes.STRING(50),
-                allowNull: false,
-            },
-            point: {
-                type: DataTypes.INTEGER.UNSIGNED,
+            class: {
+                type: DataTypes.STRING(20),
                 allowNull: false,
             },
             registered: {

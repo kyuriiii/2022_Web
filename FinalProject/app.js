@@ -41,8 +41,8 @@ var auth = require("./routes/auth");
 app.use("/auth", auth);
 var user = require("./routes/user");
 app.use("/user", user);
-// var lectureRouter=require("./routes/lectureRouter");
-// app.use("/lecture", lectureRouter);
+var lecture=require("./routes/lecture");
+app.use("/lecture", lecture);
 // var payRouter=require("./routes/payRouter");
 // app.use("/pay", payRouter);
 
