@@ -13,7 +13,30 @@ exports.getPosts = (req, res, next) => {
           attributes: ['lecture_id','name', 'professor', 'class'],
         }],
         order: [['registered', 'DESC']]
-    }).then((posts) => {console.log( posts ); res.render('main', {posts: posts})});
+    }).then((posts) => {res.render('main', {posts: posts})});
+}
+
+exports.getPost = (req, res, next) => {
+  Post.findOne({
+      include: [{
+        model: User,
+        attributes: ['user_id', 'nickname', 'email'],
+      },{
+        model: Lecture,
+        attributes: ['lecture_id','name', 'professor', 'class'],
+      }],
+      where: {post_id: req.query.post_id}
+  }).then((post) => {res.send(post);});
+}
+
+exports.deletePost = async (req,res,next) => {
+  let pays = await Pay.findAll({where: {post_id: req.query.post_id}});
+  if ( pays.length > 0 ){
+    res.status(cst.ERRORCODE_BAD_REQUEST).send({msg: "구매한 사람이 있어 삭제가 불가능합니다."});
+    return false;
+  }
+  Post.destroy({ where: { post_id: req.query.post_id } });
+  res.send( true );
 }
 
 exports.createPost = async (req, res, next) => {

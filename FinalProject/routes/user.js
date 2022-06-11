@@ -6,5 +6,7 @@ const controller = require('../controller/User');
 const router = express.Router();
 
 router.get('/', controller.getUser);
+router.get('/mypage', isLoggedIn, controller.mypage);
+router.post('/myinfo', isLoggedIn, controller.myinfo);
 
 module.exports = router;

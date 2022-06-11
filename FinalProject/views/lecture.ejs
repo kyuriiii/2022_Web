@@ -33,7 +33,7 @@
 <ul class="list-group lecture_list">
 <%  lectures.forEach( lecture => {  %>
     <li class="list-group-item" onclick="lecture_modal('<%=lecture["lecture_id"]%>','<%=lecture["name"]%>','<%=lecture["professor"]%>','<%=lecture["class"]%>');">
-        [<%=lecture["id"]%>] <%=lecture["name"]%>
+        [<%=lecture["lecture_id"]%>] <%=lecture["name"]%>
     </li>
 <% }); %>
 </ul>

@@ -1,0 +1,191 @@
+<%-include('header') %>
+<style>
+    .card:hover { cursor: pointer; transform: scale(1.05);}
+</style>
+<script type="module">
+    import { confirm, success } from '../static/js/tools.js';
+    window.confirm = confirm;
+    window.success = success;
+</script>
+<script>
+    function showPost(post_id, isWriter) {
+        window.API.getInfo( `/post?post_id=${post_id}`, (info) => {
+            let html = 
+            `<table class='table table-bordered'>
+                <tr>
+                    <th>제목</th>
+                    <td>${info.title}</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>${info.user.nickname}</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>${info.content}</td>
+                </tr>
+                <tr>
+                    <th>강의명</th>
+                    <td>${info.lecture.name}</td>
+                </tr>
+                <tr>
+                    <th>교수명</th>
+                    <td>${info.lecture.professor}</td>
+                </tr>
+                <tr>
+                    <th>강의실</th>
+                    <td>${info.lecture.class}</td>
+                </tr>
+            </table>`;
+            $( "#modal_detail .modal-body" ).html(html);
+
+            if ( isWriter ) {
+                $("#modal_detail .modal-footer .btn-danger").remove();
+                $("#modal_detail .modal-footer").prepend(
+                  `<button type="button" class="btn btn-sm btn-danger" id="detail-delete" onclick="detailDelete(${info.post_id});">Delete</button>`  
+                );
+                $("#detail-delete").removeClass("d-none");
+            }
+
+            $( "#modal_detail" ).modal("show");
+        });
+    }
+
+    function detailDelete(post_id) {
+        window.API.deleteInfo(`/post?post_id=${post_id}`, () => {
+            window.success("삭제 성공","", function(){} );
+            setTimeout(function(){
+                location.href='/user/mypage';
+            },1000);   
+        });
+    }
+
+    function editProfile() {
+        var form = document.getElementById("form_profile");
+        window.API.postInfo( "/user/myinfo", { nickname: form.nickname.value }, (result) => {
+            window.success("수정 성공", "회원 정보가 정상적으로 수정되었습니다.", ()=>{} );   
+        });
+    }
+</script>
+<div class="row">
+    <div class="col-lg-3 col-md-12">
+        <div class="d-none d-lg-block">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+                <a class="nav-link border-bottom a_deco_none active" id="mypost-tab" data-value="mypost">구매한 족보</a>
+                <a class="nav-link border-bottom a_deco_none" id="wirtepost-tab" data-value="writepost">작성한 족보</a>
+                <a class="nav-link border-bottom a_deco_none" id="myinfo-tab"data-value="myinfo">내 정보</a>
+            </div>
+        </div>
+    
+        <div class="d-block d-lg-none">
+            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active border-bottom a_deco_none" id="mypost-tab" data-value="mypost">구매한 족보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link border-bottom a_deco_none" id="wirtepost-tab" data-value="writepost">작성한 족보</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link border-bottom a_deco_none" id="myinfo-tab" data-value="myinfo">내 정보</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-12" class="tab-content">
+        <div id="mypost" class="tablist row">
+            <% if ( pays.length > 0 ) {
+                pays.forEach( (pay) => { let post = pay.post; console.log( post ); %>
+                <div class="col-lg-3 col-md-4 col-6 px-1 py-1">
+                    <div class="card" onclick="showPost('<%=post.post_id%>', false);">
+                        <img src="/public/post/<%=post.post_id%>.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><% 
+                                if ( post.title.length > 15 ) __append( post.title.substr(0,15) + "....");
+                                else __append( post.title ); %></h5>
+                            <p class="card-text">
+                                강의명 : <%=post.lecture.name%> <br>
+                                작성자 : <%=post.user.nickname%> <br> 
+                                포인트 : <%=post.point%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <%
+                });
+            }
+            else __append( "구매한 족보가 없습니다." );
+         %>
+        </div>
+        <div id="writepost" class="tablist row d-none">
+            <%
+                if ( writes.length > 0 ) {
+                    writes.forEach( (post) => { %>
+                        <div class="col-lg-3 col-md-4 col-6 px-1 py-1">
+                            <div class="card" onclick="showPost('<%=post.post_id%>', true);">
+                                <img src="/public/post/<%=post.post_id%>.png" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><% 
+                                        if ( post.title.length > 15 ) __append( post.title.substr(0,15) + "....");
+                                        else __append( post.title ); %></h5>
+                                    <p class="card-text">
+                                        강의명 : <%=post.lecture.name%> <br>
+                                        포인트 : <%=post.point%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                <%
+                    });
+                }
+                else __append( "작성한 족보가 없습니다." );
+            %>
+        </div>
+        <div class="tablist d-none" id="myinfo">
+            <form action="" id="form_profile">
+                <div class="row">
+                    <div class="col-3"><label for="email" class="visually">Email :</label></div>
+                    <div class="col-9"><input id="email" class="form-control" type="text" name="email" value="<%=user.email%>" readonly/></div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3"><label for="nickname" class="visually">Nickname :</label></div>
+                    <div class="col-9"> <input id="nickname" class="form-control" type="text" name="nickname" value="<%=user.nickname%>" required/></div>
+                </div>
+
+               <button class="btn btn-primary mt-5" type="button" onclick="editProfile();">
+                    <span>수정</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-md" id="modal_detail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">족보</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $( ".nav-link" ).click( function() {
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+
+        let tab_name = $(this).attr("data-value");
+        $("#" + tab_name).removeClass("d-none");
+        $(".tablist").not($("#" + tab_name)).addClass("d-none");
+    });
+</script>
+
+</div>
+
+<%-include('footer') %>

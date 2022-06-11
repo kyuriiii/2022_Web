@@ -14,7 +14,7 @@
     }
     function buyPost(post_id) {
         window.API.getInfo(`/buy?post_id=${post_id}`, (result) => {
-            window.success("구매 성공", "마이페이지에 가서 확인해주시기 바랍니다.");
+            window.success("구매 성공", "마이페이지에 가서 확인해주시기 바랍니다.", ()=>{});
         });
     }
 </script>

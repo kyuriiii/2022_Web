@@ -28,5 +28,7 @@ router.use((req, res, next) => {
 router.get("/", controller.getPosts);
 router.post("/one", isLoggedIn, upload.single('postfile'), controller.createPost);
 router.get("/buy", isLoggedIn, controller.buyPost);
+router.get("/post", controller.getPost);
+router.delete("/post", isLoggedIn, controller.deletePost);
 
 module.exports = router;
