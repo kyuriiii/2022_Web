@@ -1,5 +1,5 @@
 const KakaoStrategy = require('passport-kakao').Strategy;
-const { User } = require('../models');
+const { User, Point } = require('../models');
 
 module.exports = new KakaoStrategy(
   {
@@ -22,6 +22,7 @@ module.exports = new KakaoStrategy(
           sns_id: profile.id,
           provider: 'kakao',
         });
+        await Point.create({user_id: newUser.user_id, point: 3000});
         console.log('___kakao newUser', newUser);
         done(null, newUser);
       }

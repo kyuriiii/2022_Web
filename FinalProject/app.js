@@ -43,8 +43,6 @@ var user = require("./routes/user");
 app.use("/user", user);
 var lecture=require("./routes/lecture");
 app.use("/lecture", lecture);
-// var payRouter=require("./routes/payRouter");
-// app.use("/pay", payRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

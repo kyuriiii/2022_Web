@@ -1,4 +1,4 @@
-const { User, Pay, Lecture, Post } = require('../models');
+const { User, Pay, Lecture, Post, Point, sequelize } = require('../models');
 const cst = require('../config/const.js');
 
 exports.getUser = (req, res, next) => {
@@ -33,8 +33,11 @@ exports.mypage = async (req, res, next) => {
         where: {user_id: req.user.user_id},
         order: [['registered', 'DESC']]
     });
+    let get = await Point.findAll({raw:true, attributes: [[sequelize.fn('SUM', sequelize.col("point")), 'total']], where: {user_id: req.user.user_id}});
+    let used = await Pay.findAll({raw: true, attributes: [[sequelize.fn('SUM', sequelize.col("point")), 'total']], where: {user_id: req.user.user_id}});
+    let total = ( get[0].total > 0 ? get[0].total : 0 ) -  ( used[0].total > 0 ? used[0].total : 0 );
 
-    await res.render('mypage', {user: req.user, pays: pays, writes: writes})
+    await res.render('mypage', {user: req.user, pays: pays, writes: writes, point: total})
 }
 
 exports.myinfo = (req, res, next) => {

@@ -14,14 +14,10 @@ router.get('/logout', isLoggedIn, controller.logout);
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (authError, user, info) => {
     if (authError) {
-      console.error(authError);
-      return next(authError);
-    }
-    if (!user) {
-      return res.status(cst.ERRORCODE_BAD_REQUEST).send({msg: "가입되어 있지 않은 이메일입니다."});
+      res.status(cst.ERRORCODE_BAD_REQUEST).send({msg: authError});
+      return false;
     }
 
-    console.info('___req.login()');
     return req.login(user, (loginError) => {
       if (loginError) {
         console.log( loginError );

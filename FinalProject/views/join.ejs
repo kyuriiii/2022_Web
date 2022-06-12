@@ -4,7 +4,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="/static/css/user.css">
+    <script type="module">
+        import API from "/static/js/apiTools.js";
+        window.API = new API();
+    </script>
+    <script>
+        function join() {
+            var form = document.getElementById("form_join");
+            if ( !form.checkValidity() ) return false;
+
+            let user = {
+                email: form.email.value,
+                password: form.password.value,
+                nickname: form.nickname.value
+            };
+            window.API.postInfo("/auth/join", user, (result) => {
+                location.href='/auth';
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="scene flex">
@@ -15,14 +35,14 @@
         <h1 class="card__heading">
             <span> Welcome</span>
         </h1>
-        <form class="card__form" action="/auth/join" method="post">
+        <form class="card__form" id="form_join">
             <label for="email" class="visually">Email :</label>
-            <input id="email" class="card__input" type="text" name="email" />
+            <input id="email" class="card__input" type="text" name="email" required />
             <label for="password" class="visually">Password :</label>
-            <input id="password" class="card__input" type="password" name="password" />
+            <input id="password" class="card__input" type="password" name="password" required />
             <label for="nickname" class="visually">NickName :</label>
-            <input id="nickname" class="card__input" type="text" name="nickname" />
-            <button class="card__button" type="submit">
+            <input id="nickname" class="card__input" type="text" name="nickname" required />
+            <button class="card__button" type="button" onclick="join();">
             <span>Register</span>
             </button>
         </form>

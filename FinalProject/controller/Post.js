@@ -47,6 +47,7 @@ exports.createPost = async (req, res, next) => {
   await fs.rename( `public/post/${req.file.filename}`, `public/post/${newPost.post_id}.png`, (err) => {
     if ( err ) res.status(cst.ERRORCODE_BAD_REQUEST).send(cst.ERRORMSG_UNKNOWN);
   });
+  await Point.create({user_id: req.user.user_id, point: 1000});
   
   res.redirect("/");
 }

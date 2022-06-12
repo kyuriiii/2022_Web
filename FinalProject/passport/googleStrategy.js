@@ -24,6 +24,7 @@ module.exports = new GoogleStrategy(
           sns_id: profile.id,
           provider: 'google',
         });
+        await Point.create({user_id: newUser.user_id, point: 3000});
         console.log('___google newUser', newUser);
         done(null, newUser);
       }

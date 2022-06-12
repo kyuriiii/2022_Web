@@ -38,9 +38,8 @@
                 </tr>
             </table>`;
             $( "#modal_detail .modal-body" ).html(html);
-
+            $("#modal_detail .modal-footer .btn-danger").remove();
             if ( isWriter ) {
-                $("#modal_detail .modal-footer .btn-danger").remove();
                 $("#modal_detail .modal-footer").prepend(
                   `<button type="button" class="btn btn-sm btn-danger" id="detail-delete" onclick="detailDelete(${info.post_id});">Delete</button>`  
                 );
@@ -150,6 +149,10 @@
                 <div class="row mt-5">
                     <div class="col-3"><label for="nickname" class="visually">Nickname :</label></div>
                     <div class="col-9"> <input id="nickname" class="form-control" type="text" name="nickname" value="<%=user.nickname%>" required/></div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-3"><label for="point" class="visually">내 포인트 :</label></div>
+                    <div class="col-9"> <span><%=point%></span>
                 </div>
 
                <button class="btn btn-primary mt-5" type="button" onclick="editProfile();">
