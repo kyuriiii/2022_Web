@@ -26,6 +26,10 @@ module.exports = (Sequelize, DataTypes) => {
                 type: DataTypes.STRING(50),
                 allowNull: false,
             },
+            password: {
+                type: DataTypes.STRING(255),
+                allowNull: false,
+            },
             registered: {
                 type: "TIMESTAMP",
                 defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),

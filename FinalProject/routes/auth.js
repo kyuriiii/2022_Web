@@ -3,12 +3,35 @@ const express = require('express');
 const passport = require('../passport/index.js');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const controller = require('../controller/Auth');
+const cst = require('../config/const.js');
 
 const router = express.Router();
 
 router.get('/', controller.login);
-
+router.get('/join', controller.joinView);
+router.post('/join', controller.join);
 router.get('/logout', isLoggedIn, controller.logout);
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (authError, user, info) => {
+    if (authError) {
+      console.error(authError);
+      return next(authError);
+    }
+    if (!user) {
+      return res.status(cst.ERRORCODE_BAD_REQUEST).send({msg: "가입되어 있지 않은 이메일입니다."});
+    }
+
+    console.info('___req.login()');
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        console.log( loginError );
+        return res.status(cst.ERRORCODE_BAD_REQUEST).send({msg: loginError});
+      }
+      console.log( "success" );
+      return res.send(true);
+    });
+  })(req, res, next);
+});
 
 router.get('/kakao', passport.authenticate('kakao'));
 router.get(

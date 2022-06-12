@@ -1,5 +1,6 @@
 const passport = require('passport');
 const kakaoStrategy = require('./kakaoStrategy');
+const localStrategy = require('./localStrategy');
 const googleStrategy = require('./googleStrategy');
 const { User } = require('../models');
 
@@ -15,6 +16,7 @@ passport.deserializeUser((user_id, done) => {
     .catch((err) => done(err));
 });
 
+passport.use(localStrategy);
 passport.use(kakaoStrategy);
 passport.use(googleStrategy);
 

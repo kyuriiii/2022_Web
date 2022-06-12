@@ -2,10 +2,34 @@
 <head>
     <title>로그인</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300&amp;display=swap'>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="/static/css/oauth2.css">
     <link rel="stylesheet" href="/static/css/user.css">
+    <script type="module">
+        import API from "/static/js/apiTools.js";
+        import { success } from '../static/js/tools.js';
+        window.success = success;
+        window.API = new API();
+    </script>
+    <script>
+        function login() {
+            var form = document.getElementById("form_login");
+            if ( !form.checkValidity() ) return false;
+
+            let user = {
+                email: form.email.value,
+                password: form.password.value
+            };
+            window.API.postInfo("/auth/login", user, (result) => {
+                window.success("로그인 성공","", function(){} );
+                setTimeout(function(){
+                    location.href='/';
+                },1000);   
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="scene flex">
@@ -16,6 +40,17 @@
         <h1 class="card__heading">
             <span> Hello! Log - In </span>
         </h1>
+        
+        <form class="card__form" id="form_login">
+            <label for="email" class="visually">Email :</label>
+            <input id="email" class="card__input" type="text" name="email" required />
+            <label for="password" class="visually">Password :</label>
+            <input id="password" class="card__input" type="password" name="password"  required/>
+            <button class="card__button" type="button" onclick="login();">
+            <span>Login</span>
+            </button>
+        </form>
+
         <div class="social_sign-in mt-2">
             <div id="mt-3" class="social_btns">
                 <div id="google">
@@ -30,6 +65,7 @@
                 </div>
             </div>
         </div>
+        <a href="/auth/join">Register</a>
         </section>
     </div>
 </body>
