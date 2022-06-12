@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <fieldset>
+    <legend>익명 채팅방 생성</legend>
+    <form id="room-form" action="/room" method="post">
+      <input type="text" name="title" placeholder="방 제목">
+      <button type="submit">생성</button>
+    </form>
+  </fieldset>
+{% endblock %}

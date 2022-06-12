@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+
+.mine { text-align: right; }
+.system { text-align: center; }
+
+.mine div:first-child, .other div:first-child { font-size: 12px; }
+.mine div:last-child, .other div:last-child {
+  display: inline-block;
+  border: 1px solid silver;
+  border-radius: 5px;
+  padding: 2px 5px;
+  max-width: 300px;
+}
+
+.join-btn { padding: 3px 10px; }
+#room-form [type='text'], #room-form [type='submit'] {   
+  display: inline-block;
+  height: 30px;
+  margin: 20px 0px 20px 10px;
+}
+#exit-btn { position: absolute; top: 20px; right: 20px; }
+
+#chat-list { height: 400px; overflow: auto; padding: 5px; }
+#chat-form { text-align: right; }
+label[for='chat'], #chat, #chat-form [type='submit'] {
+  display: inline-block;
+  height: 30px;
+  vertical-align: top;
+}
+label[for='chat'] { cursor: pointer; padding: 5px; }
+
+table, table th, table td {
+  text-align: center;
+  padding: 7px 30px;
+  border: 1px solid silver;
+  border-collapse: collapse;
+}
+
+table { margin: 20px; }
